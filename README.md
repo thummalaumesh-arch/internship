@@ -319,7 +319,7 @@ This project was developed as a Python internship project to demonstrate practic
 
 ## Developer
 
-**Parthu**
+**Harshil**
 
 Python Developer Intern | B.Tech CSE (AI & ML)
 
