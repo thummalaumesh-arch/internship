@@ -18,13 +18,20 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg
 )
 
-from .database import Database
-
-from .services import (
-    TaskService,
-    export_csv,
-    export_pdf
-)
+try:
+    from .database import Database
+    from .services import (
+        TaskService,
+        export_csv,
+        export_pdf
+    )
+except ImportError:
+    from database import Database  # type: ignore
+    from services import (  # type: ignore
+        TaskService,
+        export_csv,
+        export_pdf
+    )
 
 
 ctk.set_appearance_mode("dark")
@@ -1802,3 +1809,12 @@ class TaskManagerApp(ctk.CTk):
             pady=20
 
         )
+
+
+def main():
+    app = TaskManagerApp()
+    app.mainloop()
+
+
+if __name__ == "__main__":
+    main()

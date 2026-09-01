@@ -1,100 +1,83 @@
 # Student Task & Productivity Manager
 
-> A simple, user-friendly Python desktop application designed to help students organize, prioritize, track, and manage their academic and personal tasks efficiently.
+> A modern, dark-themed Python desktop application that helps students organize, prioritize, track, and export their academic and personal tasks — powered by SQLite, CustomTkinter, and Matplotlib.
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)](https://www.python.org/)
-[![GUI](https://img.shields.io/badge/GUI-Tkinter-orange)](https://docs.python.org/3/library/tkinter.html)
-[![Storage](https://img.shields.io/badge/Storage-Local%20JSON-green)](https://www.json.org/)
-[![Status](https://img.shields.io/badge/Status-Completed-success)]()
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
+[![GUI](https://img.shields.io/badge/GUI-CustomTkinter-blueviolet)](https://github.com/TomSchimansky/CustomTkinter)
+[![Database](https://img.shields.io/badge/Storage-SQLite-lightgrey?logo=sqlite)](https://sqlite.org/)
+[![License](https://img.shields.io/badge/License-Educational-green)]()
+[![Status](https://img.shields.io/badge/Status-Working-success)]()
 
 ---
 
 ## Overview
 
-**Student Task & Productivity Manager** is a Python-based desktop productivity application developed to simplify everyday task management for students.
+**Student Task & Productivity Manager** is a fully-featured Python desktop productivity application built with a clean, modular package architecture. It gives students a modern dark-mode GUI to manage tasks end-to-end — from creation through analytics and export.
 
-The application allows users to create tasks, assign priorities and deadlines, update existing tasks, mark tasks as completed, filter tasks, and export task information.
-
-The project demonstrates practical implementation of:
-
-* Python Programming
-* Object-Oriented Programming (OOP)
-* GUI Development
-* File Handling
-* JSON Data Storage
-* Event-Driven Programming
-* Task Management Logic
+The app runs locally with **no internet connection required** and persists all data in a lightweight SQLite database.
 
 ---
 
 ## Features
 
-### Task Management
+### 📊 Dashboard
+- At-a-glance statistics: Total, Completed, Pending, Overdue, Completion Rate
+- Upcoming tasks list (next 7 pending tasks)
+- Interactive calendar widget
 
-* Add new tasks
-* Edit existing tasks
-* Delete tasks
-* Mark tasks as completed
-* View all available tasks
+### ✓ Task Manager
+- Add, edit, and delete tasks
+- Toggle tasks between **Pending** and **Completed**
+- Filter by status, priority, and category
+- Full-text search across title, description, and category
+- Scrollable task table with sortable columns
 
-### Priority Management
+### 📈 Analytics
+- Pie chart: Task completion ratio
+- Bar chart: High-priority, overdue, and completed task counts
+- Powered by Matplotlib embedded directly in the GUI
 
-Tasks can be organized according to priority:
+### 📤 Export
+- Export filtered task lists to **CSV** (via Pandas)
+- Export professional **PDF reports** (via ReportLab) with styled table headers
 
-* High
-* Medium
-* Low
-
-### Deadline Tracking
-
-* Assign deadlines to tasks
-* View upcoming tasks
-* Identify overdue tasks
-
-### Task Filtering
-
-Filter tasks based on their current status:
-
-* All Tasks
-* Pending
-* Completed
-
-### Local Data Storage
-
-Task information is stored locally using a JSON file, allowing the application to preserve data between sessions without requiring an external database.
-
-### Data Export
-
-Task information can be exported for backup or further analysis.
+### 🎨 UI/UX
+- Dark / Light / System appearance modes
+- CustomTkinter modern widget set
+- Responsive layout — minimum window size enforced
 
 ---
 
 ## Technologies Used
 
-| Technology    | Purpose                       |
-| ------------- | ----------------------------- |
-| Python        | Core programming language     |
-| Tkinter       | Graphical User Interface      |
-| JSON          | Local data storage            |
-| File Handling | Reading and writing task data |
-| OOP           | Application architecture      |
+| Technology        | Purpose                                    |
+| ----------------- | ------------------------------------------ |
+| Python 3.10+      | Core programming language                  |
+| CustomTkinter     | Modern dark-mode GUI framework             |
+| Tkinter / ttk     | Base widgets (Treeview, dialogs)           |
+| tkcalendar        | Date picker and calendar widget            |
+| SQLite3           | Local persistent task database             |
+| Matplotlib        | Embedded analytics charts                  |
+| Pandas            | CSV data export                            |
+| ReportLab         | PDF report generation                      |
 
 ---
 
 ## Project Structure
 
-```text
-Student-Task-Productivity-Manager/
+```
+Student_task_productivity_manager/
 │
-├── main.py
-├── requirements.txt
-├── tasks.json
-├── README.md
-└── screenshots/
-    └── application.png
+├── __init__.py          # Package marker
+├── __main__.py          # Entry point for `python -m` execution
+├── gui.py               # Main application window + all UI views
+├── database.py          # SQLite database layer (CRUD + queries)
+├── services.py          # Business logic, validation, CSV/PDF export
+├── requirements.txt     # Python dependencies
+└── README.md
 ```
 
-> The exact files may vary depending on the final project implementation.
+> Data and logs are stored **outside** the package folder (sibling `data/` and `logs/` directories) and are excluded from version control via `.gitignore`.
 
 ---
 
@@ -103,234 +86,137 @@ Student-Task-Productivity-Manager/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/student-task-productivity-manager.git
+git clone https://github.com/thummalaumesh-arch/internship.git
+cd internship
 ```
 
-### 2. Enter the Project Directory
+### 2. (Recommended) Create a Virtual Environment
 
 ```bash
-cd student-task-productivity-manager
-```
+python -m venv venv
 
-### 3. Create a Virtual Environment
+# Windows
+venv\Scripts\activate
 
-```bash
-python3 -m venv venv
-```
-
-### 4. Activate the Virtual Environment
-
-**Linux / macOS**
-
-```bash
+# Linux / macOS
 source venv/bin/activate
 ```
 
-**Windows**
-
-```bash
-venv\Scripts\activate
-```
-
-### 5. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 6. Run the Application
-
-```bash
-python3 main.py
-```
-
 ---
 
-## Linux Tkinter Setup
+## Running the Application
 
-If Tkinter is not installed on Ubuntu/Debian-based systems:
-
-```bash
-sudo apt update
-sudo apt install python3-tk
-```
-
-Then run:
+From the **parent directory** of the package (i.e., one level above `Student_task_productivity_manager/`):
 
 ```bash
-python3 main.py
+# Recommended — runs as a package module
+python -m Student_task_productivity_manager
+
+# Alternative — run directly
+python Student_task_productivity_manager/gui.py
 ```
 
 ---
 
 ## How to Use
 
-### 1. Add a Task
-
-Enter the required information such as:
-
-* Task title
-* Description
-* Priority
-* Deadline
-
-Then click **Add Task**.
-
-### 2. Edit a Task
-
-Select an existing task and choose the **Edit** option to update its information.
-
-### 3. Complete a Task
-
-Select a task and mark it as **Completed** once the work is finished.
-
-### 4. Delete a Task
-
-Select an unwanted task and click **Delete**.
-
-### 5. Filter Tasks
-
-Use the filtering options to quickly view:
-
-```text
-All Tasks
-Pending Tasks
-Completed Tasks
-```
-
-### 6. Export Tasks
-
-Use the export functionality to save task information for backup or future use.
+| Action            | How                                                             |
+| ----------------- | --------------------------------------------------------------- |
+| **Add Task**      | Click `+ Add Task` → fill in title, category, priority, deadline, description → Save |
+| **Edit Task**     | Select a row in Task Manager → click `✎ Edit`                  |
+| **Complete Task** | Select a row → click `✓ Complete / Reopen` (toggles status)    |
+| **Delete Task**   | Select a row → click `🗑 Delete` → confirm                      |
+| **Filter**        | Use the Status / Priority / Category dropdowns                  |
+| **Search**        | Type in the search box → click Search                           |
+| **Export CSV**    | Task Manager → `Export CSV` → choose save location             |
+| **Export PDF**    | Task Manager → `Export PDF` → choose save location             |
+| **Analytics**     | Click `📈 Analytics` in the sidebar                             |
+| **Theme**         | Use the Appearance dropdown at the bottom of the sidebar        |
 
 ---
 
-## Application Workflow
+## Application Architecture
 
-```text
-              ┌──────────────────┐
-              │   Start Program  │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │   Load Tasks     │
-              │   from JSON      │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │   Main Dashboard │
-              └────────┬─────────┘
-                       │
-          ┌────────────┼────────────┐
-          ▼            ▼            ▼
-      Add Task      Edit Task    Delete Task
-          │            │            │
-          └────────────┼────────────┘
-                       ▼
-              ┌──────────────────┐
-              │ Update Task Data │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │ Save to JSON     │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │ Continue / Exit  │
-              └──────────────────┘
 ```
+gui.py  ──imports──▶  database.py   (SQLite CRUD)
+        ──imports──▶  services.py   (Validation + Export)
+```
+
+- **`Database`** — context-manager-based connection handling; creates tables on first run
+- **`TaskService`** — stateless validation and task normalization
+- **`export_csv` / `export_pdf`** — standalone export functions using Pandas and ReportLab
+- **`TaskManagerApp`** — main `ctk.CTk` window; view switching via `show_dashboard / show_tasks / show_analytics`
+- **`TaskDialog`** — modal `ctk.CTkToplevel` for add/edit workflows
 
 ---
 
-## Data Management
+## Data Storage
 
-The application uses a local JSON file to store task information.
+All task data is stored in a local SQLite file at:
 
-Example:
-
-```json
-{
-    "title": "Complete Python Assignment",
-    "priority": "High",
-    "deadline": "2026-08-30",
-    "status": "Pending"
-}
+```
+../data/tasks.db   (relative to the package; never committed to git)
 ```
 
-This approach keeps the project lightweight and eliminates the need for a database server.
+Schema:
+
+```sql
+CREATE TABLE tasks (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    title        TEXT NOT NULL,
+    description  TEXT DEFAULT '',
+    category     TEXT DEFAULT 'General',
+    priority     TEXT NOT NULL DEFAULT 'Medium',
+    deadline     TEXT NOT NULL,
+    status       TEXT NOT NULL DEFAULT 'Pending',
+    created_at   TEXT NOT NULL,
+    completed_at TEXT
+);
+```
 
 ---
 
 ## Learning Outcomes
 
-Through this project, the following concepts were practically implemented:
-
-* Python fundamentals
-* Object-Oriented Programming
-* Classes and objects
-* Functions and modules
-* Exception handling
-* GUI development with Tkinter
-* JSON serialization and deserialization
-* File handling
-* Event-driven programming
-* User input validation
-* Application workflow design
+- Python package structure and relative imports
+- Object-Oriented Programming (classes, inheritance, static methods)
+- SQLite3 with context managers and parameterized queries
+- GUI development with CustomTkinter and Tkinter ttk
+- Embedded Matplotlib charts in Tkinter windows
+- Data export with Pandas (CSV) and ReportLab (PDF)
+- Exception handling and input validation
+- Application logging with Python's `logging` module
 
 ---
 
 ## Future Improvements
 
-The project can be extended with:
-
-* Desktop task reminders
-* Productivity statistics
-* Task completion charts
-* SQLite database integration
-* Cloud synchronization
-* User authentication
-* Dark mode
-* Mobile application
-* AI-powered task prioritization
-* Calendar integration
-
----
-
-## Application Preview
-
-Add screenshots of your application inside the `screenshots` folder and display them here:
-
-```markdown
-![Application Screenshot](screenshots/application.png)
-```
-
----
-
-## Project Status
-
-**Status:** Completed
-
-This project was developed as a Python internship project to demonstrate practical Python programming, GUI development, data management, and software development skills.
+- Desktop notifications for upcoming deadlines
+- Recurring task support
+- Cloud sync (Firebase / Supabase)
+- User profiles and multi-user support
+- AI-powered priority suggestions
+- Mobile companion app
 
 ---
 
 ## Developer
 
-**Harshil**
-
-Python Developer Intern | B.Tech CSE (AI & ML)
+**Umesh Thummala**  
+Python Developer Intern | B.Tech CSE  
 
 ---
 
 ## License
 
-This project is created for educational and internship purposes.
+This project was developed for educational and internship demonstration purposes.
 
 ---
 
-<p align="center">
-  Built with ❤️ using Python
-</p>
+<p align="center">Built with ❤️ using Python & CustomTkinter</p>
